@@ -8,6 +8,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentManager
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,HomeFragment()).commit()
 
         drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
 
@@ -42,9 +45,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_rate -> supportFragmentManager.beginTransaction().replace(R.id.fragment_container,RatingFragment()).commit()
         }
         when(item.itemId){
-            R.id.nav_home -> {val intent = Intent(applicationContext, MainActivity::class.java)
+            R.id.nav_home -> {
+                supportFragmentManager.beginTransaction().replace(R.id.fragment_container,HomeFragment()).commit()
+                /*val intent = Intent(applicationContext, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)}
+                    startActivity(intent)*/
+            }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
