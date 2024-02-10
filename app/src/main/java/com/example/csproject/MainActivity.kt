@@ -1,18 +1,24 @@
 package com.example.csproject
 
+import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     private lateinit var drawerLayout:DrawerLayout
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,6 +37,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val toggle = ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_nav,R.string.close_nav)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
+
+        val fab = findViewById<FloatingActionButton>(R.id.fab)
+
+        fab.setOnClickListener {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container,CartFragment()).commit()
+        }
 
     }
 
@@ -63,6 +75,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
         else{
             onBackPressedDispatcher.onBackPressed()
+        }
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.info -> {
+                val alertDialogBuilder = AlertDialog.Builder(this)
+                alertDialogBuilder.setTitle("Contact Information")
+                alertDialogBuilder.setMessage("Email: support@bboutique.com\n\nPhone: 88888888")
+                alertDialogBuilder.setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
+                    dialog.dismiss()
+                }
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
