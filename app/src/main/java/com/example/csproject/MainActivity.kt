@@ -1,12 +1,15 @@
 package com.example.csproject
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
@@ -42,6 +45,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         fab.setOnClickListener {
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container,CartFragment()).commit()
+            val menuItem = navigationView.menu.findItem(R.id.nav_cart)
+            menuItem?.isChecked = true
         }
 
     }
@@ -59,9 +64,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             R.id.nav_home -> {
                 supportFragmentManager.beginTransaction().replace(R.id.fragment_container,HomeFragment()).commit()
-                /*val intent = Intent(applicationContext, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-                    startActivity(intent)*/
             }
         }
         drawerLayout.closeDrawer(GravityCompat.START)
@@ -96,5 +98,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+    private fun closeKeyBoard() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
+    fun onTouch(view: View) {
+        closeKeyBoard()
     }
 }
