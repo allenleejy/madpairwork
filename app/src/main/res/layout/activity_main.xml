@@ -9,7 +9,7 @@
     tools:openDrawer="start"
     tools:context=".MainActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/constraint"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -20,8 +20,8 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="480dp"
-            android:layout_marginEnd="25dp"
+            android:layout_marginStart="280dp"
+            android:layout_marginTop="490dp"
             android:clickable="true"
             android:src="@drawable/icon_cart"
             app:layout_constraintEnd_toEndOf="parent"
@@ -41,8 +41,8 @@
         <!-- ImageView(s) and other content -->
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="5dp"
             app:layout_constraintHeight_percent="0.08"
@@ -55,18 +55,23 @@
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
-            android:layout_height="570dp"
+            android:layout_height="wrap_content"
             android:layout_below="@id/toolbar"
+            android:layout_marginTop="65dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_marginTop="7dp"
-            android:layout_marginEnd="85dp"
+            android:layout_marginEnd="10dp"
             android:fontFamily="@font/regista"
             android:text="Blossom Boutique"
+            android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="23dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,7 +79,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.5" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 <!-- NavigationView -->
     <com.google.android.material.navigation.NavigationView

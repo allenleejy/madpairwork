@@ -23,7 +23,6 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -36,14 +35,14 @@ class HomeFragment : Fragment() {
 
         recyclerView.layoutManager = layoutManager
 
-        CardList.add(Card("Red Long sleeved T-shirt", "$99.99", R.drawable.shirt1))
-        CardList.add(Card("Blue long sleeved T-shirt", "$100.04", R.drawable.shirt2))
-        CardList.add(Card("Black pants", "$50.50", R.drawable.pants1))
-        CardList.add(Card("Green pants", "$50.50", R.drawable.pants2))
-        CardList.add(Card("Green flower formal", "$100.00", R.drawable.formal1))
-        CardList.add(Card("Blue flower formal", "$110.00", R.drawable.formal2))
-        CardList.add(Card("Garden socks", "$20.00", R.drawable.socks))
-        CardList.add(Card("Cobra belt", "$50.00", R.drawable.belt))
+        CardList.add(Card("Red T-shirt", "$99.99", R.drawable.shirt1))
+        CardList.add(Card("Blue T-shirt", "$99.99", R.drawable.shirt2))
+        CardList.add(Card("Black Pants", "$49.99", R.drawable.pants1))
+        CardList.add(Card("Green Pants", "$49.99", R.drawable.pants2))
+        CardList.add(Card("Green Formal", "$109.99", R.drawable.formal1))
+        CardList.add(Card("Blue Formal", "$109.99", R.drawable.formal2))
+        CardList.add(Card("Garden Socks", "$19.99", R.drawable.socks))
+        CardList.add(Card("Cobra Belt", "$49.99", R.drawable.belt))
         val adapter = RecyclerAdapter(CardList)
         recyclerView.adapter = adapter
 

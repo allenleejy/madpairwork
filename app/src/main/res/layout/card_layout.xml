@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="170dp"
+    android:layout_height="300dp"
     android:layout_margin="5dp"
     android:clickable="true"
     android:foreground="?selectableItemBackground"
@@ -15,8 +16,8 @@
     app:layout_constraintWidth_percent="0.5">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="187dp"
-        android:layout_height="330dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="10dp">
 
         <ImageView
@@ -25,6 +26,7 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.9" />
@@ -36,6 +38,7 @@
             android:layout_marginTop="140dp"
             android:fontFamily="serif"
             android:singleLine="false"
+            android:textAlignment="center"
             android:textColor="@color/darkBlue"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,6 +55,7 @@
             android:layout_marginTop="250dp"
             android:fontFamily="serif"
             android:singleLine="false"
+            android:textAlignment="viewStart"
             android:textColor="@color/darkBlue"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
