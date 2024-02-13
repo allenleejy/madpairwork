@@ -59,16 +59,7 @@ class MemberFragment : Fragment() {
                 }
             }
             else {
-                var used = false
-                /*for (member in membersList) {
-                    if (usernameEditText.text.toString() == member.username) {
-                        usernameEditText.error = "Username unavailable"
-                        used = true
-                    }
-                }*/
-                if (!used) {
-                    signUp()
-                }
+                signUp()
             }
         }
         return view
