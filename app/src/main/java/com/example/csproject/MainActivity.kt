@@ -20,7 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
-    //hihihihih test
+
     private lateinit var drawerLayout:DrawerLayout
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,7 +50,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val menuItem = navigationView.menu.findItem(R.id.nav_cart)
             menuItem?.isChecked = true
         }
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
