@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="4dp" /> <!-- Adjust the radius as needed -->
+    <solid android:color="@color/imageBlue" /> <!-- Set the background color of the buttons -->
+</shape>

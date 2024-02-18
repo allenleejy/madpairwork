@@ -20,12 +20,10 @@
             android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="280dp"
-            android:layout_marginTop="490dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="16dp"
             android:clickable="true"
-            android:src="@drawable/icon_cart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:src="@drawable/icon_cart" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
