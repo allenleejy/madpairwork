@@ -36,11 +36,13 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="7dp"
+            android:layout_marginEnd="21dp"
             android:fontFamily="@font/regista"
             android:text="Blossom Boutique"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="23dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 

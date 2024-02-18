@@ -2,10 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/about"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:icon="@android:drawable/ic_menu_sort_alphabetically"
+        android:title="Info"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:icon="@drawable/info"
-        android:title="Info"
+        android:title="About"
         app:showAsAction="always" />
 </menu>

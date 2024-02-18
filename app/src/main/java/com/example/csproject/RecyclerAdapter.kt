@@ -31,6 +31,7 @@ class RecyclerAdapter(val CardList: ArrayList<Card>) : RecyclerView.Adapter<Recy
             itemDetails = itemView.findViewById(R.id.review_description)
 
             itemView.setOnClickListener{ view ->
+
                 val pos = adapterPosition +1
                 val context = view.context
                 val intent = Intent(context, ItemDetailsActivity::class.java).apply {

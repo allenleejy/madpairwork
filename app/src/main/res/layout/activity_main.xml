@@ -49,7 +49,6 @@
             app:layout_constraintWidth_percent="0.16"
             app:srcCompat="@drawable/boutiquelogo" />
 
-        <!-- FrameLayout for fragment container -->
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
@@ -61,12 +60,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
+        <!-- FrameLayout for fragment container -->
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginTop="7dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="21dp"
             android:fontFamily="@font/regista"
             android:text="Blossom Boutique"
             android:textAlignment="center"
@@ -76,6 +77,7 @@
             app:layout_constraintHeight_percent="0.07"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.5" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

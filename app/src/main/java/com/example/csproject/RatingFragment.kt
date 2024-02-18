@@ -65,6 +65,9 @@ class RatingFragment : Fragment() {
             else {
                 reviewManager.addReview(Review(reviewName.text.toString(), reviewDescription.text.toString(), reviewRatingBar.rating.toDouble(), spinner.selectedItem.toString()))
                 Snackbar.make(view, "Review for " + spinner.selectedItem.toString() + " has been added", Snackbar.LENGTH_LONG).show()
+                reviewName.text?.clear()
+                reviewDescription.text?.clear()
+                reviewRatingBar.rating = 0.0.toFloat()
             }
         }
 

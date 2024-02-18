@@ -1,39 +1,32 @@
 package com.example.csproject
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.FrameLayout
-import android.widget.Spinner
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentContainerView
-import androidx.fragment.app.FragmentManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OpenReviewListener{
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var drawerLayout:DrawerLayout
     private lateinit var reviewManager: ReviewManager
     private lateinit var memberDatabase: MemberDatabase
-    private lateinit var fragmentContainerView: FragmentContainerView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener(this)
 
@@ -49,15 +42,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         }
         else {
+
             supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
         }
 
         drawerLayout = findViewById(R.id.drawer_layout)
 
         reviewManager = ReviewManager(this)
-        reviewManager.removeAllReviews()
+
         memberDatabase = MemberDatabase(this)
-        memberDatabase.removeAllMembers()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -116,9 +109,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.info -> {
+                initReviews()
                 val alertDialogBuilder = AlertDialog.Builder(this)
                 alertDialogBuilder.setTitle("Contact Information")
                 alertDialogBuilder.setMessage("Email: support@bboutique.com\n\nPhone: 88888888")
+                alertDialogBuilder.setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
+                    dialog.dismiss()
+                }
+                val alertDialog = alertDialogBuilder.create()
+                alertDialog.show()
+                true
+            }
+            R.id.about -> {
+                memberDatabase.removeAllMembers()
+                val alertDialogBuilder = AlertDialog.Builder(this)
+                alertDialogBuilder.setTitle("About Us")
+                alertDialogBuilder.setMessage("Blossom Boutique is an emerging fashion retailer around the world!")
                 alertDialogBuilder.setPositiveButton("OK") { dialog: DialogInterface, which: Int ->
                     dialog.dismiss()
                 }
@@ -140,9 +146,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onTouch(view: View) {
         closeKeyBoard()
     }
+    fun initReviews() {
+        val reviewManager = ReviewManager(this)
+        reviewManager.removeAllReviews()
 
-    override fun onReviewOpen() {
-        Log.d("detect", "i detected")
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,RatingFragment()).commit()
+        reviewManager.addReview(Review("Susan", "Amazing T-shirt", 4.5, "Red T-shirt"))
+        reviewManager.addReview(Review("John", "Great T-shirt", 4.0, "Red T-shirt"))
+        reviewManager.addReview(Review("Emily", "Nice T-shirt", 4.0, "Blue T-shirt"))
+
+        reviewManager.addReview(Review("Michael", "Excellent Pants", 4.5, "Black Pants"))
+        reviewManager.addReview(Review("Sophia", "Comfortable Pants", 4.0, "Green Pants"))
+        reviewManager.addReview(Review("Daniel", "Good Pants", 3.5, "Green Pants"))
+
+        reviewManager.addReview(Review("Olivia", "Great Formal Shirt", 4.5, "Green Formal"))
+        reviewManager.addReview(Review("Matthew", "Presentable Blue Shirt", 4.0, "Blue Formal"))
+        reviewManager.addReview(Review("Amanda", "Comfortable Sock", 3.5, "Garden Sock"))
+        reviewManager.addReview(Review("Ava", "Disappointing Belt", 2.0, "Cobra Belt"))
     }
 }
