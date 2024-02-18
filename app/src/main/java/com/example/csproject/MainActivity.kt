@@ -1,11 +1,13 @@
 package com.example.csproject
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -109,5 +111,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     fun onTouch(view: View) {
         closeKeyBoard()
+    }
+    companion object {
+        const val ITEM_DETAILS_REQUEST_CODE = 1 // You can use any value you want here
     }
 }

@@ -7,4 +7,14 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+    <string-array name="product_options">
+        <item>Red T-shirt</item>
+        <item>Blue T-shirt</item>
+        <item>Black Pants</item>
+        <item>Green Pants</item>
+        <item>Green Formal</item>
+        <item>Blue Formal</item>
+        <item>Garden Socks</item>
+        <item>Cobra Belt</item>
+    </string-array>
 </resources>

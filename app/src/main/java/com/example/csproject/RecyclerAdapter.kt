@@ -27,8 +27,8 @@ class RecyclerAdapter(val CardList: ArrayList<Card>) : RecyclerView.Adapter<Recy
 
         init {
             itemImage = itemView.findViewById(R.id.cart_image)
-            itemTitle = itemView.findViewById(R.id.item_title)
-            itemDetails = itemView.findViewById(R.id.item_detail)
+            itemTitle = itemView.findViewById(R.id.review_name)
+            itemDetails = itemView.findViewById(R.id.review_description)
 
             itemView.setOnClickListener{ view ->
                 val pos = adapterPosition +1
