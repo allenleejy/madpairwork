@@ -1,15 +1,12 @@
 package com.example.csproject
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import androidx.core.content.ContextCompat.getSystemService
+import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,6 +42,8 @@ class MemberFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_member, container, false)
 
+        val memberDatabase = MemberDatabase()
+
         usernameEditText = view.findViewById(R.id.usernameEditText)
         passwordEditText = view.findViewById(R.id.passwordEditText)
 
@@ -59,7 +58,32 @@ class MemberFragment : Fragment() {
                 }
             }
             else {
+                val member = Member(usernameEditText.text.toString(),
+                    passwordEditText.text.toString()
+                )
+                memberDatabase.addMember(member)
                 signUp()
+            }
+        }
+
+        val loginButton = view.findViewById<Button>(R.id.loginbutton)
+        loginButton.setOnClickListener{
+            val member = Member(usernameEditText.text.toString(),
+                passwordEditText.text.toString()
+            )
+            val checkResult = memberDatabase.checkIfMember(member)
+
+            if (checkResult == "successful"){
+                Toast.makeText(requireActivity(),"Login Successful!",Toast.LENGTH_SHORT).show()
+                requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WelcomeFragment()).commit()
+            }
+            else if (checkResult == "wrong passwd"){
+                Toast.makeText(requireActivity(),"Wrong password, try again",Toast.LENGTH_LONG).show()
+                usernameEditText.text?.clear()
+                passwordEditText.text?.clear()
+            }
+            else{
+                Toast.makeText(requireActivity(),"You are not a member. Pls sign up!",Toast.LENGTH_LONG).show()
             }
         }
         return view
@@ -73,24 +97,5 @@ class MemberFragment : Fragment() {
 
         requireActivity().supportFragmentManager.beginTransaction().replace(R.id.fragment_container, WelcomeFragment()).commit()
 
-    }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MemberFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MemberFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
     }
 }
