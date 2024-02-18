@@ -24,6 +24,7 @@ import com.google.android.material.navigation.NavigationView
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var drawerLayout:DrawerLayout
+    private lateinit var reviewManager: ReviewManager
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container,HomeFragment()).commit()
 
-        drawerLayout = findViewById<DrawerLayout>(R.id.drawer_layout)
+        drawerLayout = findViewById(R.id.drawer_layout)
+
+        reviewManager = ReviewManager(this)
+        reviewManager.removeAllReviews()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -52,6 +56,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val menuItem = navigationView.menu.findItem(R.id.nav_cart)
             menuItem?.isChecked = true
         }
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -102,6 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             else -> super.onOptionsItemSelected(item)
         }
     }
+
     private fun closeKeyBoard() {
         val view = this.currentFocus
         if (view != null) {
@@ -112,6 +118,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun onTouch(view: View) {
         closeKeyBoard()
     }
+
     companion object {
         const val ITEM_DETAILS_REQUEST_CODE = 1 // You can use any value you want here
     }

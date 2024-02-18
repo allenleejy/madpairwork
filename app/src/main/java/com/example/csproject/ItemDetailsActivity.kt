@@ -91,7 +91,7 @@ class ItemDetailsActivity : AppCompatActivity() {
         val displayAmount = findViewById<TextView>(R.id.review_amount_upper)
 
         val reviewManager = ReviewManager(this)
-
+        initReviews()
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_reviews)
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
@@ -115,14 +115,15 @@ class ItemDetailsActivity : AppCompatActivity() {
 
         reviewManager.addReview(Review("Susan", "Amazing T-shirt", 4.5, "Red T-shirt"))
         reviewManager.addReview(Review("John", "Great T-shirt", 4.0, "Red T-shirt"))
-        reviewManager.addReview(Review("Emily", "Nice T-shirt", 4.0, "Red T-shirt"))
+        reviewManager.addReview(Review("Emily", "Nice T-shirt", 4.0, "Blue T-shirt"))
 
         reviewManager.addReview(Review("Michael", "Excellent Pants", 4.5, "Black Pants"))
-        reviewManager.addReview(Review("Sophia", "Comfortable Pants", 4.0, "Black Pants"))
-        reviewManager.addReview(Review("Daniel", "Good Pants", 3.5, "Black Pants"))
+        reviewManager.addReview(Review("Sophia", "Comfortable Pants", 4.0, "Green Pants"))
+        reviewManager.addReview(Review("Daniel", "Good Pants", 3.5, "Green Pants"))
 
-        reviewManager.addReview(Review("Olivia", "Fantastic Belt", 4.5, "Cobra Belt"))
-        reviewManager.addReview(Review("Matthew", "Stylish Belt", 4.0, "Cobra Belt"))
+        reviewManager.addReview(Review("Olivia", "Great Formal Shirt", 4.5, "Green Formal"))
+        reviewManager.addReview(Review("Matthew", "Presentable Blue Shirt", 4.0, "Blue Formal"))
+        reviewManager.addReview(Review("Amanda", "Comfortable Sock", 3.5, "Garden Sock"))
         reviewManager.addReview(Review("Ava", "Disappointing Belt", 2.0, "Cobra Belt"))
     }
 }
