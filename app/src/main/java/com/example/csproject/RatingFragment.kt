@@ -21,6 +21,7 @@ class RatingFragment : Fragment() {
     private lateinit var reviewName: TextInputEditText
     private lateinit var reviewDescription: TextInputEditText
     private lateinit var reviewRatingBar: RatingBar
+    private var productName: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,6 +30,7 @@ class RatingFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        productName = arguments?.getInt(ARG_PRODUCT_NAME) ?: 0
         return inflater.inflate(R.layout.fragment_rating, container, false)
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class RatingFragment : Fragment() {
 
             spinner.adapter = adapter
         }
+        spinner.setSelection(productName)
         reviewName = view.findViewById(R.id.edit_text_name)
         reviewDescription = view.findViewById(R.id.edit_text_description)
 
@@ -65,6 +68,18 @@ class RatingFragment : Fragment() {
             }
         }
 
+    }
+    companion object {
+        private const val ARG_PRODUCT_NAME = "product_name"
+
+        fun newInstance(productName: Int): RatingFragment {
+            val fragment = RatingFragment()
+            val args = Bundle().apply {
+                putInt(ARG_PRODUCT_NAME, productName)
+            }
+            fragment.arguments = args
+            return fragment
+        }
     }
 
 }

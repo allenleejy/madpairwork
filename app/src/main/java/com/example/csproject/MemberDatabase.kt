@@ -1,21 +1,99 @@
 package com.example.csproject
 
-class MemberDatabase {
-    public var memberList = ArrayList<Member>()
+import android.content.Context
+import android.util.Log
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
+class MemberDatabase (private val context: Context) {
+    private val sharedPreferences = context.getSharedPreferences("MemberPreferences", Context.MODE_PRIVATE)
+    private val gson = Gson()
 
     fun addMember(m: Member) {
-        memberList.add(m)
+        val members = getMembers().toMutableList()
+        members.add(m)
+        saveMembers(members)
     }
 
-    fun checkIfMember(m:Member): String {
-        for (mem in memberList){
-            if (mem.username == m.username && mem.password == m.password){
-                return "successful"
+    fun checkIfMember(m:Member): Int {
+        val members = getMembers().toMutableList()
+        val iterator = members.iterator()
+        while (iterator.hasNext()) {
+            val currentItem = iterator.next()
+            if (currentItem.username == m.username && currentItem.password == m.password) {
+                return 1
             }
-            else if (mem.username == m.username){
-                return "wrong passwd"
+            else if (currentItem.username == m.username) {
+                return -1
             }
         }
-        return "no such person"
+        return 0
+    }
+    fun getMembers(): List<Member> {
+        val json = sharedPreferences.getString("memberItem", null)
+        return if (json != null) {
+            gson.fromJson(json, object : TypeToken<List<Member>>() {}.type)
+        } else {
+            emptyList()
+        }
+    }
+
+    fun isLoggedIn(): Boolean {
+
+        val members = getMembers().toMutableList()
+        val iterator = members.iterator()
+        while (iterator.hasNext()) {
+            val currentItem = iterator.next()
+            if (currentItem.signedIn) {
+                return true
+            }
+        }
+        return false
+    }
+
+    fun returnLoggedIn(): String {
+        val members = getMembers().toMutableList()
+        val iterator = members.iterator()
+        while (iterator.hasNext()) {
+            val currentItem = iterator.next()
+            if(currentItem.signedIn) {
+                return currentItem.username
+            }
+        }
+        return ""
+    }
+
+    fun logout(name: String) {
+        val members = getMembers().toMutableList()
+        val iterator = members.iterator()
+        while (iterator.hasNext()) {
+            val currentItem = iterator.next()
+            if (currentItem.username == name) {
+                currentItem.signedIn = false
+
+            }
+        }
+        saveMembers(members)
+    }
+
+    fun login(name: String) {
+        val members = getMembers().toMutableList()
+        val iterator = members.iterator()
+        while (iterator.hasNext()) {
+            val currentItem = iterator.next()
+            if (currentItem.username == name) {
+                currentItem.signedIn = true
+
+            }
+        }
+        saveMembers(members)
+    }
+    fun removeAllMembers() {
+        saveMembers(emptyList())
+    }
+
+    private fun saveMembers(items: List<Member>) {
+        val json = gson.toJson(items)
+        sharedPreferences.edit().putString("memberItem", json).apply()
     }
 }

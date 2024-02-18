@@ -8,6 +8,7 @@
     tools:context=".MemberFragment">
 
     <TextView
+        android:id="@+id/membername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -15,6 +16,17 @@
         android:text="Member Signup"
         android:textSize="24sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/logoutbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/green"
+        android:text="Log out"
+        android:textColor="@color/black"
+        android:visibility="gone"
+        tools:visibility="gone" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameInputLayout"

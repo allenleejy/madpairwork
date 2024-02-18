@@ -12,38 +12,59 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.FrameLayout
+import android.widget.Spinner
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.FragmentManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener, OpenReviewListener{
 
     private lateinit var drawerLayout:DrawerLayout
     private lateinit var reviewManager: ReviewManager
-    @SuppressLint("MissingInflatedId")
+    private lateinit var memberDatabase: MemberDatabase
+    private lateinit var fragmentContainerView: FragmentContainerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener(this)
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,HomeFragment()).commit()
+        val products = resources.getStringArray(R.array.product_options)
+        val buttonPressed = intent.getBooleanExtra("goreview", false)
+        val reviewname = intent.getStringExtra("product")
+
+        if (buttonPressed) {
+            val ratingFragment = RatingFragment.newInstance( products.indexOf(reviewname)?: 0)
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container,ratingFragment).commit()
+            val menuItem = navigationView.menu.findItem(R.id.nav_rate)
+            menuItem?.isChecked = true
+
+        }
+        else {
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container, HomeFragment()).commit()
+        }
 
         drawerLayout = findViewById(R.id.drawer_layout)
 
         reviewManager = ReviewManager(this)
         reviewManager.removeAllReviews()
+        memberDatabase = MemberDatabase(this)
+        memberDatabase.removeAllMembers()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         getSupportActionBar()?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val navigationView = findViewById<NavigationView>(R.id.nav_view)
-        navigationView.setNavigationItemSelectedListener(this)
+
 
         val toggle = ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_nav,R.string.close_nav)
         drawerLayout.addDrawerListener(toggle)
@@ -56,6 +77,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val menuItem = navigationView.menu.findItem(R.id.nav_cart)
             menuItem?.isChecked = true
         }
+
 
     }
 
@@ -119,7 +141,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         closeKeyBoard()
     }
 
-    companion object {
-        const val ITEM_DETAILS_REQUEST_CODE = 1 // You can use any value you want here
+    override fun onReviewOpen() {
+        Log.d("detect", "i detected")
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,RatingFragment()).commit()
     }
 }

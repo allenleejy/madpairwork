@@ -54,10 +54,7 @@ class ItemDetailsActivity : AppCompatActivity() {
             spinner.adapter = adapter
         }
 
-        val addReview = findViewById<Button>(R.id.add_review_btn)
-        addReview.setOnClickListener {
 
-        }
 
         val imageResource = intent.getIntExtra("image", R.drawable.boutiquelogo)
         val title = intent.getStringExtra("title") ?: "Title Not Found"
@@ -67,6 +64,15 @@ class ItemDetailsActivity : AppCompatActivity() {
         titleTextView.text = title
         priceTextView.text = price
         descriptionTextView.text = description
+
+        val addReview = findViewById<Button>(R.id.add_review_btn)
+        addReview.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("goreview", true)
+            intent.putExtra("product", title)
+            finish()
+            startActivity(intent)
+        }
 
         val addCart = findViewById<Button>(R.id.btn_add_to_cart)
         addCart.setOnClickListener {
@@ -126,4 +132,5 @@ class ItemDetailsActivity : AppCompatActivity() {
         reviewManager.addReview(Review("Amanda", "Comfortable Sock", 3.5, "Garden Sock"))
         reviewManager.addReview(Review("Ava", "Disappointing Belt", 2.0, "Cobra Belt"))
     }
+
 }

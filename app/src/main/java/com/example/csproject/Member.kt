@@ -4,5 +4,6 @@ import android.text.Editable
 
 data class Member(
     val username: String,
-    val password: String
+    val password: String,
+    var signedIn: Boolean
 )
