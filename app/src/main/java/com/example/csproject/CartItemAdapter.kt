@@ -1,6 +1,5 @@
 import android.annotation.SuppressLint
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +7,11 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.csproject.CartItem
 import com.example.csproject.CartItemListener
 import com.example.csproject.CartManager
 import com.example.csproject.R
-import org.w3c.dom.Text
 
 class CartItemAdapter(val CartList: List<CartItem>,val context: Context, val cartManager: CartManager, val listener: CartItemListener) : RecyclerView.Adapter<CartItemAdapter.ViewHolder>() {
 

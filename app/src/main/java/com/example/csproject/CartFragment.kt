@@ -1,7 +1,6 @@
 package com.example.csproject
 
 import CartItemAdapter
-import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -43,6 +41,9 @@ class CartFragment : Fragment(), CartItemListener {
         checkout = requireView().findViewById(R.id.checkout_button)
         checkout.setOnClickListener {
             val price = cartManager.getTotalCost().substring(7)
+            cartManager.removeAllItemsFromCart()
+            cartRecyclerView.adapter = CartItemAdapter(cartManager.getCartItems(), requireContext(), cartManager, this)
+            costView.text = "Total: $0.00"
             Toast.makeText(context, "Checkout Cart of " + price, Toast.LENGTH_LONG).show()
         }
     }

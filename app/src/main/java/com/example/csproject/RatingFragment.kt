@@ -8,8 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import android.widget.RatingBar
 import android.widget.Spinner
 import android.widget.Toast
@@ -37,6 +35,7 @@ class RatingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val reviewManager = ReviewManager(requireContext())
         val spinner = view.findViewById<Spinner>(R.id.spinner_product)
+        val memberDatabase = MemberDatabase(requireContext())
         reviewRatingBar = view.findViewById(R.id.reviewratingbar)
         ArrayAdapter.createFromResource(requireContext(), R.array.product_options, android.R.layout.simple_spinner_item).also { adapter ->
 
@@ -47,7 +46,10 @@ class RatingFragment : Fragment() {
         spinner.setSelection(productName)
         reviewName = view.findViewById(R.id.edit_text_name)
         reviewDescription = view.findViewById(R.id.edit_text_description)
-
+        val loggeduser = memberDatabase.returnLoggedIn()
+        if (loggeduser.isNotBlank()) {
+            reviewName.setText(loggeduser)
+        }
         val reviewButton = view.findViewById<Button>(R.id.btn_add_review)
         reviewButton.setOnClickListener {
             if (reviewName.text.toString().isBlank() || reviewDescription.text.toString().isBlank() || reviewRatingBar.rating == 0.0.toFloat()) {
